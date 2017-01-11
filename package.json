@@ -5,5 +5,8 @@
   "main": "index.js",
   "bin": "bin/gistm",
   "author": "Guilherme Nagatomo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.79.0"
+  }
 }
