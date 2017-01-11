@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+const gistm = require('../')
+const meow = require('meow')
+const cli = meow(`
+  Usage
+      $ gistm <url>
+
+  Options
+    --destination, -d  Folder where the files will be placed
+                       Defaults to the current working directory
+
+    [Note]
+    This option can be placed in your package.json inside a gistm key:
+      {
+        "name": "my-package",
+        "version": "1.0.0",
+        ...
+        "gistm": {
+          "destination": "./src/lib"
+        }
+      }
+
+  Examples
+    $ gistm https://gist.github.com/cryzed/e002e7057435f02cc7894b9e748c5671
+    $ gistm cryzed/e002e7057435f02cc7894b9e748c5671
+    $ gistm cryzed/e002e7057435f02cc7894b9e748c5671 -d ./src/lib
+`, {
+  alias: {
+    destination: 'd'
+  }
+})
+
+if (cli.input.length === 0) {
+  cli.showHelp()
+}
+
+gistm(cli.input[0], cli.flags, err => {
+  if (err && err.code === 'ENOENT') {
+    console.error(`ERROR The specified destination folder does not exists: ${cli.flags.destination}`)
+    process.exit(2)
+  }
+})

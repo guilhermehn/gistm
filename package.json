@@ -1,0 +1,9 @@
+{
+  "name": "gistm",
+  "version": "1.0.0",
+  "description": "Fetch gist files from Github",
+  "main": "index.js",
+  "bin": "bin/gistm",
+  "author": "Guilherme Nagatomo",
+  "license": "MIT"
+}
